@@ -2,7 +2,7 @@ A SwiftUI and Metal package for bautiful animated blob gradients.
 
 ## Preview
 
-<video src="https://github.com/user-attachments/assets/cb401e0c-29ba-41df-926d-8d02283726c3" width="250"></video>
+<video src="https://github.com/user-attachments/assets/c3407468-3dff-44bb-b9b3-4d7f10122564" width="250"></video>
 
 ## Usage
 
