@@ -20,9 +20,6 @@ let package = Package(
         .target(
             name: "BlobGradient",
             dependencies: [],
-            resources: [
-                .process("BlobGradient.metal")
-            ]
         )
     ]
 )

@@ -22,25 +22,26 @@ struct BlogView: View {
     }
     
     var body: some View {
+        let shaderFunction = ShaderFunction(library: .bundle(.module), name: "blobGradient")
+        
         TimelineView(.animation) { tl in
             let time = start.distance(to: tl.date)
             
             Rectangle()
                 .visualEffect { [radiuses, colors, startsX, startsY, endsX, endsY] content, proxy in
-                    content
-                        .layerEffect(
-                            ShaderLibrary.blobGradient(
-                                .float2(proxy.size),
-                                .float(time),
-                                .floatArray(radiuses),
-                                .colorArray(colors),
-                                .floatArray(startsX),
-                                .floatArray(startsY),
-                                .floatArray(endsX),
-                                .floatArray(endsY)
-                            ),
-                            maxSampleOffset: .zero
-                        )
+                    let shader = Shader(function: shaderFunction, arguments: [
+                        .float2(proxy.size),
+                        .float(time),
+                        .floatArray(radiuses),
+                        .colorArray(colors),
+                        .floatArray(startsX),
+                        .floatArray(startsY),
+                        .floatArray(endsX),
+                        .floatArray(endsY)
+                    ])
+                    
+                    return content
+                        .layerEffect(shader, maxSampleOffset: .zero)
                 }
                 .clipShape(.rect)
         }
