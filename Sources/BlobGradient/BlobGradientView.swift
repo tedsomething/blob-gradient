@@ -1,10 +1,15 @@
 import SwiftUI
 
-struct BlobGradientView: View {
+public struct BlobGradientView: View {
     var colors: [Color]
     var highlights: [Color]
     
-    var body: some View {
+    public init(colors: [Color] = [], highlights: [Color] = []) {
+        self.colors = colors
+        self.highlights = highlights
+    }
+    
+    public var body: some View {
         ZStack(alignment: .center) {
             if !colors.isEmpty {
                 BlogView(values: colors)

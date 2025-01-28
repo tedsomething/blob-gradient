@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct BlogView: View {
+struct BlogView: View {
     @State var start: Date = .now
         
     private var radiuses = [Float]()
@@ -21,7 +21,7 @@ public struct BlogView: View {
         }
     }
     
-    public var body: some View {
+    var body: some View {
         TimelineView(.animation) { tl in
             let time = start.distance(to: tl.date)
             
