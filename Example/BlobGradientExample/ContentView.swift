@@ -7,10 +7,11 @@ struct ContentView: View {
             Color(red: 0.99, green: 0.967, blue: 0.9)
                 .ignoresSafeArea()
             
+            
+            
             ZStack(alignment: .leading) {
                 BlobGradientView(
-                    colors: [.blue, .pink, .yellow],
-                    highlights: [.blue, .pink, .yellow]
+                    colors: [.blue, .pink, .yellow]
                 )
                     .background(.white)
                     .clipShape(.rect(cornerRadius: 56))
@@ -30,7 +31,7 @@ struct ContentView: View {
                         .padding()
                     
                     Spacer()
-                                                                
+                    
                     Text("23°")
                         .font(.system(size: 120))
                         .fontWeight(.semibold)

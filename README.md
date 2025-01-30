@@ -21,7 +21,8 @@ struct ContentView: View {
     var body: some View {
         BlobGradientView(
             colors: [.blue, .pink, .yellow, .green],
-            highlights: [.blue, .pink, .yellow, .green]
+            blur: 100, // optional, defaults to 100
+            duration: 10.0 // optional, defaults to 10.0
         )
         .background(.green)
     }

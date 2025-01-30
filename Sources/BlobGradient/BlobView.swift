@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct BlogView: View {
-    @State var start: Date = .now
-        
+    private let start: Date = .now
+    private let duration: Double
+    
     private var radiuses = [Float]()
     private var colors = [Color]()
     private var startsX = [Float]()
@@ -10,7 +11,7 @@ struct BlogView: View {
     private var endsX = [Float]()
     private var endsY = [Float]()
     
-    init(values: [Color]) {
+    init(values: [Color], duration: Double) {
         for value in values {
             radiuses.append(Float.random(in: 0...1))
             colors.append(value)
@@ -19,6 +20,8 @@ struct BlogView: View {
             endsX.append(Float.random(in: 0...1))
             endsY.append(Float.random(in: 0...1))
         }
+        
+        self.duration = duration
     }
     
     var body: some View {
@@ -26,12 +29,14 @@ struct BlogView: View {
         
         TimelineView(.animation) { tl in
             let time = start.distance(to: tl.date)
+            let progress = fmod(time, duration) / duration // 0 -> 1
+            let loop = Float(1.0 - fabs(2.0 * progress - 1.0))  // 0 -> 1 -> 0
             
             Rectangle()
-                .visualEffect { [radiuses, colors, startsX, startsY, endsX, endsY] content, proxy in
+                .visualEffect { [duration, radiuses, colors, startsX, startsY, endsX, endsY] content, proxy in
                     let shader = Shader(function: shaderFunction, arguments: [
                         .float2(proxy.size),
-                        .float(time),
+                        .float(loop),
                         .floatArray(radiuses),
                         .colorArray(colors),
                         .floatArray(startsX),
@@ -43,7 +48,6 @@ struct BlogView: View {
                     return content
                         .layerEffect(shader, maxSampleOffset: .zero)
                 }
-                .clipShape(.rect)
         }
         .clipped()
     }

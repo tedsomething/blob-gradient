@@ -2,7 +2,7 @@
 using namespace metal;
 #include <SwiftUI/SwiftUI_Metal.h>
 
-[[ stitchable ]] half4 blobGradient(float2 position, SwiftUI::Layer layer, float2 size, float time, device const float *radiuses, int radiusesCount, device const half4 *colors, int colorsCount, device const float *startsX, int startsXCount, device const float *startsY, int startsYCount, device const float *endsX, int endsXCount, device const float *endsY, int endsYCount) {
+[[ stitchable ]] half4 blobGradient(float2 position, SwiftUI::Layer layer, float2 size, float progress, device const float *radiuses, int radiusesCount, device const half4 *colors, int colorsCount, device const float *startsX, int startsXCount, device const float *startsY, int startsYCount, device const float *endsX, int endsXCount, device const float *endsY, int endsYCount) {
     float2 uv = position / size;
     float aspectRatio = size.x / size.y;
     half4 color = half4(0);
@@ -11,8 +11,7 @@ using namespace metal;
         float2 start = float2(startsX[i], startsY[i]);
         float2 end = float2(endsX[i], endsY[i]);
         
-        float t = 0.5 + 0.5 * sin(time * 0.5);
-        float2 center = mix(start, end, t);
+        float2 center = mix(start, end, progress);
         
         float2 delta = uv - center;
         
