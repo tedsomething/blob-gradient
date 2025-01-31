@@ -60,7 +60,7 @@ struct BlogView: View {
     func progressGet(time: Double, duration: Double?) -> Float {
         if let duration = duration, duration > 0 {
             let progress = fmod(time, duration) / duration // 0 -> 1
-            let loop = 1.0 - fabs(2.0 * progress - 1.0)  // 0 -> 1 -> 0
+            let loop = 0.5 - 0.5 * cos(Double.pi * 2 * progress) // 0 -> 1 -> 0
             
             return Float(loop)
         } else {
