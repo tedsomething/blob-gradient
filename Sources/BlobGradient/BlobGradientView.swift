@@ -7,8 +7,8 @@ public struct BlobGradientView: View {
     /// Blur radius to apply to the entire blob gradient effect.
     let blur: CGFloat
 
-    /// Duration (in seconds) for one complete animation cycle.
-    let duration: Double
+    /// Duration (in seconds) for one complete animation cycle. `nil` if dissabled.
+    let duration: Double?
 
     /**
      Initializes a `BlobGradientView`.
@@ -16,9 +16,9 @@ public struct BlobGradientView: View {
      - Parameters:
        - colors: An array of `Color` values used for the animated gradient blobs. Defaults to an empty array.
        - blur: Blur radius applied to the entire effect. Defaults to `100`.
-       - duration: Duration (in seconds) of one full animation cycle. Defaults to `10.0`.
+       - duration: Duration (in seconds) of one full animation cycle. Use `nil` to disable animation. Defaults to `10.0`.
      */
-    public init(colors: [Color], blur: CGFloat = 100, duration: Double = 10.0) {
+    public init(colors: [Color], blur: CGFloat = 100, duration: Double? = 10.0) {
         self.colors = colors
         self.blur = blur
         self.duration = duration

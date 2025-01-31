@@ -2,7 +2,7 @@ import SwiftUI
 
 struct BlogView: View {
     private let start: Date = .now
-    private let duration: Double
+    private let duration: Double?
 
     private var radiuses = [Float]()
     private var colors = [Color]()
@@ -11,7 +11,7 @@ struct BlogView: View {
     private var endsX = [Float]()
     private var endsY = [Float]()
 
-    init(values: [Color], duration: Double) {
+    init(values: [Color], duration: Double?) {
         for value in values {
             radiuses.append(Float.random(in: 0...1))
             colors.append(value)
@@ -30,8 +30,7 @@ struct BlogView: View {
 
         TimelineView(.animation) { tl in
             let time = start.distance(to: tl.date)
-            let progress = fmod(time, duration) / duration  // 0 -> 1
-            let loop = Float(1.0 - fabs(2.0 * progress - 1.0))  // 0 -> 1 -> 0
+            let progress = progressGet(time: time, duration: duration)
 
             Rectangle()
                 .visualEffect {
@@ -41,7 +40,7 @@ struct BlogView: View {
                         function: shaderFunction,
                         arguments: [
                             .float2(proxy.size),
-                            .float(loop),
+                            .float(progress),
                             .floatArray(radiuses),
                             .colorArray(colors),
                             .floatArray(startsX),
@@ -56,5 +55,16 @@ struct BlogView: View {
                 }
         }
         .clipped()
+    }
+    
+    func progressGet(time: Double, duration: Double?) -> Float {
+        if let duration = duration, duration > 0 {
+            let progress = fmod(time, duration) / duration // 0 -> 1
+            let loop = 1.0 - fabs(2.0 * progress - 1.0)  // 0 -> 1 -> 0
+            
+            return Float(loop)
+        } else {
+            return 1.0
+        }
     }
 }
