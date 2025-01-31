@@ -3,16 +3,16 @@ import SwiftUI
 public struct BlobGradientView: View {
     /// An array of `Color` values used for the animated gradient blobs.
     let colors: [Color]
-    
+
     /// Blur radius to apply to the entire blob gradient effect.
     let blur: CGFloat
-    
+
     /// Duration (in seconds) for one complete animation cycle.
     let duration: Double
-    
+
     /**
      Initializes a `BlobGradientView`.
-     
+
      - Parameters:
        - colors: An array of `Color` values used for the animated gradient blobs. Defaults to an empty array.
        - blur: Blur radius applied to the entire effect. Defaults to `100`.
@@ -23,7 +23,7 @@ public struct BlobGradientView: View {
         self.blur = blur
         self.duration = duration
     }
-    
+
     public var body: some View {
         ZStack(alignment: .center) {
             if !colors.isEmpty {

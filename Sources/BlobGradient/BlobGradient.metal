@@ -6,7 +6,7 @@ using namespace metal;
     float2 uv = position / size;
     float aspectRatio = size.x / size.y;
     half4 color = half4(0);
-        
+    
     for (int i = 0; i < colorsCount; i++) {
         float2 start = float2(startsX[i], startsY[i]);
         float2 end = float2(endsX[i], endsY[i]);
