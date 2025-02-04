@@ -8,7 +8,7 @@ A SwiftUI and Metal package for bautiful animated blob gradients.
 
 Install the BlobGradient package using Swift Package Manager:
 ```
-https://github.com/tedsomething/blob-gradient
+https://github.com/teodorszeltins/blob-gradient
 ```
 
 Place `BlobGradientView` in your app: 
